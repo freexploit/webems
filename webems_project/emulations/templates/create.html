@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}WebEm | {{page}}{% endblock %}
+
+{% block nav-create %}{% if page == 'Create' %}active{% endif %}{% endblock %}
+{% block nav-all %}{% if page == 'All Emulations' %}active{% endif %}{% endblock %}
+
+{% block body %}
+	<h1>{{page}}</h1>
+{% endblock %}
