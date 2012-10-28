@@ -14,9 +14,7 @@
 			<th>Name</th>
 			<th>Original URL</th>
 			<th>Created</th>
-			<th>Created By</th>
 			<th>Updated</th>
-			<th>Updated By</th>
 			<th>Edit</th>
 			<th>My Emulations</th>
 			<th>Delete</th>
@@ -26,12 +24,10 @@
 		{% for emulation in emulations %}
 		<tr>
 			<td>{{emulation.id}}</td>
-			<td><a target="_blank" href="/emulation/{{emulation.id}}/view/">{{emulation.title}}</td>
+			<td><a target="_blank" href="/emulations/emulation/{{emulation.id}}/view/">{{emulation.title}}</td>
 			<td>{{emulation.page_url}}</td>
-			<td>{{emulation.created}}</td>
-			<td>{{emulation.created}}</td>
-			<td>{{emulation.updated}}</td>
-			<td>{{emulation.updated}}</td>
+			<td>{{emulation.created}} <br/>by {{emulation.creator}}</td>
+			<td>{{emulation.updated}} <br/>by {{emulation.updator}}</td>
 			<td><a href="/emulation/{{emulation.id}}/edit"target="_blank">edit</a></td>
 			<td><a href="/emulation/{{emulation.id}}/myemulations"target="_blank">remove</a></td>
 			<td><a href="/emulation/{{emulation.id}}/delete"target="_blank">delete</a></td>

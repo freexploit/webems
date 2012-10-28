@@ -11,7 +11,7 @@ class ExtendedFlatPageForm(FlatpageForm):
 class ExtendedFlatPageAdmin(FlatPageAdmin):
     form = ExtendedFlatPageForm
     list_display = ('id', 'url', 'title', 'created', 'updated', 'page_url', )
-    fieldsets = ( (None, {'fields': ('url', 'title', 'sites', 'created', 'updated', 'page_url', 'content', 'original_html' )}),)
+    fieldsets = ( (None, {'fields': ('url', 'title', 'sites', 'created', 'created_by', 'updated', 'updated_by', 'page_url', 'content', 'original_html' )}),)
 
 class MyEmulationsAdmin(admin.ModelAdmin):
 	list_display = ('id', 'user', 'emulation')

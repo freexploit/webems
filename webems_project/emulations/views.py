@@ -1,11 +1,12 @@
-from models import ExtendedFlatPage
+from models import ExtendedFlatPage, MyEmulations
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 
 def mine(request):
     page = "My Emulations"
-    emulations = ExtendedFlatPage.objects.all()
+    emulations = ExtendedFlatPage.objects.all().filter(created_by=request.user.id)
     return render_to_response('emulations.html', {'emulations' : emulations, 'page' : page}, context_instance=RequestContext(request))
 
 def all(request):
