@@ -6,17 +6,20 @@
 <h1>{{page}}</h1>
 <div class="container">
 	<form class="form-horizontal">
+		{% csrf_token %}
 		<legend>Log in</legend>
 		<div class="control-group">
-			<label class="control-label" for="inputEmail">Email</label>
+			<label class="control-label" for="signin_email">Email</label>
 			<div class="controls">
-				<input type="text" id="inputEmail" placeholder="Email">
+				<input type="text" id="signin_email" placeholder="Email">
+				<span class="hide help-inline no_email">Email does not exist. Please correct, or sign up below if you're a new user.</span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="inputPassword">Password</label>
+			<label class="control-label" for="signin_password">Password</label>
 			<div class="controls">
-				<input type="password" id="inputPassword" placeholder="Password">
+				<input type="password" id="signin_password" placeholder="Password">
+				<span class="hide help-inline">Password is not correct.</span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -24,28 +27,33 @@
 				<label class="checkbox">
 					<input type="checkbox"> Remember me
 				</label>
-				<button type="submit" class="btn">Sign in</button>
+				<button type="submit" class="btn" id="signin">Sign in</button>
 			</div>
 		</div>
 	</form>
 	<form class="form-horizontal">
+		{% csrf_token %}
 		<legend>or Sign up</legend>
 		<div class="control-group">
-			<label class="control-label" for="inputEmail">Email</label>
+			<label class="control-label" for="signup_email">Email</label>
 			<div class="controls">
-				<input type="text" id="inputEmail" placeholder="Email">
+				<input type="text" id="signup_email" placeholder="Email">
+				<span class="hide help-inline incorrect_email">Please enter a valid email address.</span>
+				<span class="hide help-inline email_exists">Email already exists for an account. Please either sign in above or use a different email.</span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="inputPassword">Password</label>
+			<label class="control-label" for="signup_password">Password</label>
 			<div class="controls">
-				<input type="password" id="inputPassword" placeholder="Password">
+				<input type="password" id="signup_password" placeholder="Password">
+				<span class="hide help-inline">Password must be between 6 and 12 characters.</span>
 			</div>
 		</div>
 		<div class="control-group">
-			<label class="control-label" for="inputPassword">Password Again</label>
+			<label class="control-label" for="signup_password_repeat">Password Again</label>
 			<div class="controls">
-				<input type="password" id="inputPassword" placeholder="Retype Password">
+				<input type="password" id="signup_password_repeat" placeholder="Retype Password">
+				<span class="hide help-inline">Passwords do not match.</span>
 			</div>
 		</div>
 		<div class="control-group">
@@ -53,9 +61,13 @@
 				<label class="checkbox">
 					<input type="checkbox"> Remember me
 				</label>
-				<button type="submit" class="btn">Sign in</button>
+				<button type="submit" class="btn" id="signup">Sign Up</button>
 			</div>
 		</div>
 	</form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/accounts.js"></script>
 {% endblock %}
