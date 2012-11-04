@@ -25,6 +25,7 @@ class ExtendedFlatPage(FlatPage):
         ordering = ['-created']
 
 def save(self, *args, **kwargs):
+    print 'ya', self.args
     #track the creator/last editor via an optional kwarg
     active_user = self.kwargs.get('user')
     if active_user:
@@ -34,8 +35,8 @@ def save(self, *args, **kwargs):
     return super(AuditBase, self).save(*args, **kwargs)
 
 class MyEmulations(models.Model):
-	user = models.ForeignKey(User)
-	emulation = models.ForeignKey(ExtendedFlatPage)
+    user = models.ForeignKey(User)
+    emulation = models.ManyToManyField(ExtendedFlatPage)
 
 class Rewrites(models.Model):
 	METHODS = (
