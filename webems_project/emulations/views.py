@@ -1,3 +1,4 @@
+import simplejson as json
 from models import ExtendedFlatPage, MyEmulations
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -41,15 +42,19 @@ def edit(request, pk, url=""):
     return render_to_response('emulation.html', {'content' : content})
 
 def delete(request, pk, url=""):
-    content = "Emulation " + pk + "does not exist. <a href='/''>Home</a>."
+    response = {}
+    response['success'] = True
+    response['errors'] = {}
     try:
         f = ExtendedFlatPage.objects.get(id=pk)
-        content = f.content
+        f.delete()
     except ExtendedFlatPage.DoesNotExist:
+        response['success'] = False
         pass
     except ExtendedFlatPage.MultipleObjectsReturned:
+        response['success'] = False
         pass
-    return render_to_response('emulation.html', {'content' : content})
+    return HttpResponse(json.dumps(response), mimetype='application/json')
 
 def myemulations(request, pk, url=""):
     content = "Emulation " + pk + "does not exist. <a href='/''>Home</a>."
