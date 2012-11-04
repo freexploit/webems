@@ -22,17 +22,45 @@
 	</thead>
 	<tbody>
 		{% for emulation in emulations %}
-		<tr>
+		<tr id="{{emulation.id}}">
 			<td>{{emulation.id}}</td>
 			<td><a target="_blank" href="/emulations/emulation/{{emulation.id}}/view/">{{emulation.title}}</td>
-			<td>{{emulation.page_url}}</td>
+			<td class="emulation_url">{{emulation.page_url}}</td>
 			<td>{{emulation.created}} <br/>by {{emulation.creator}}</td>
 			<td>{{emulation.updated}} <br/>by {{emulation.updator}}</td>
-			<td><a href="/emulation/{{emulation.id}}/edit"target="_blank">edit</a></td>
-			<td><a href="/emulation/{{emulation.id}}/myemulations"target="_blank">remove</a></td>
-			<td><a href="/emulation/{{emulation.id}}/delete"target="_blank">delete</a></td>
+			<td><a href="/emulations/emulation/{{emulation.id}}/edit"target="_blank">edit</a></td>
+			<td><a href="/emulations/emulation/{{emulation.id}}/myemulations"target="_blank">remove</a></td>
+			<td><a class="delete" href="#">delete</a></td>
 		</tr>
 		{% endfor %}
 	</tbody>
 </table>
+
+<div class="modal hide fade" id="confirm_delete">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h3>Confirm Delete</h3>
+  </div>
+  <div class="modal-body">
+    <p id="modal_text">Confirm delete of emulation id <span id="emulation_id"></span> url <span id="emulation_url"></span></p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+    <a href="#" class="btn btn-primary delete_button">Delete</a>
+  </div>
+</div>
+
+<div class="modal hide fade" id="emulation_deleted">
+  <div class="modal-body">
+    <p id="modal_text">Emulation deleted</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#" id="confirm_deleted" class="btn btn-primary">OK</a>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/emulations.js"></script>
 {% endblock %}
