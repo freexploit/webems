@@ -36,7 +36,7 @@ def save(self, *args, **kwargs):
 
 class MyEmulations(models.Model):
     user = models.ForeignKey(User)
-    emulation = models.ManyToManyField(ExtendedFlatPage)
+    emulation = models.ForeignKey(ExtendedFlatPage)
 
 class Rewrites(models.Model):
 	METHODS = (

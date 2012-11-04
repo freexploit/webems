@@ -8,6 +8,7 @@ from models import ExtendedFlatPage, Rewrites, MyEmulations
 class ExtendedFlatPageForm(FlatpageForm):
     class Meta:
 	    model = ExtendedFlatPage
+
 class ExtendedFlatPageAdmin(FlatPageAdmin):
     form = ExtendedFlatPageForm
     list_display = ('id', 'url', 'title', 'created', 'updated', 'page_url', )
