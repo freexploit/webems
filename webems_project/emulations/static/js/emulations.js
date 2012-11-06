@@ -24,4 +24,15 @@ $(document).ready(function(evt) {
 		evt.preventDefault();
 		window.location.reload();
 	});
+	$('.myemulations').click(function(evt){
+		evt.preventDefault();
+		var em_id = $(this).closest('tr').attr('id');
+        $.post('/emulations/emulation/' + em_id + '/myemulations/', {
+            data: ""
+        }, function(data) {
+            if (data && data.success) {
+               console.log('success');
+            }
+        });
+	});
 });

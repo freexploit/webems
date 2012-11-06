@@ -34,10 +34,6 @@ def save(self, *args, **kwargs):
        self.created_by = active_user
     return super(AuditBase, self).save(*args, **kwargs)
 
-class MyEmulations(models.Model):
-    user = models.ForeignKey(User)
-    emulation = models.ForeignKey(ExtendedFlatPage)
-
 class Rewrites(models.Model):
 	METHODS = (
         (u'S', u'normal_string'),

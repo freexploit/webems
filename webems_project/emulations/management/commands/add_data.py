@@ -8,7 +8,7 @@ class Command(BaseCommand):
         e.save()
         e.site = [1]
         e.save()
-        e = ExtendedFlatPage(url="/2/", title="two", updated_by=1, created_by=1, content="<html><head><title>two</title></head><body>this is page two</body></html>", original_html="<html><head><title>two</title></head><body>this is page two</body></html>", page_url="http://www.economist.com/")
-        e.save()
-        e.site = [1]
-        e.save()
+        f = ExtendedFlatPage(url="/2/", title="two", updated_by=1, created_by=1, content="<html><head><title>two</title></head><body>this is page two</body></html>", original_html="<html><head><title>two</title></head><body>this is page two</body></html>", page_url="http://www.economist.com/")
+        f.save()
+        f.site = [1]
+        f.save()

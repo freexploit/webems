@@ -2,8 +2,7 @@ from django.contrib.auth.models import User
 from django.contrib import admin
 from django.contrib.flatpages.admin import FlatpageForm, FlatPageAdmin
 from django.contrib.flatpages.models import FlatPage
-from models import ExtendedFlatPage, Rewrites, MyEmulations
-
+from models import ExtendedFlatPage, Rewrites
 
 class ExtendedFlatPageForm(FlatpageForm):
     class Meta:
@@ -17,10 +16,6 @@ class ExtendedFlatPageAdmin(FlatPageAdmin):
 class RewritesAdmin(admin.ModelAdmin):
 	list_display = ('id', 'find', 'replace', 'method')
 
-class MyEmulationsAdmin(admin.ModelAdmin):
-	list_display = ('id', 'user', 'emulation')
-
 admin.site.register(Rewrites, RewritesAdmin)
-admin.site.register(MyEmulations, MyEmulationsAdmin)
 admin.site.unregister(FlatPage)
 admin.site.register(ExtendedFlatPage, ExtendedFlatPageAdmin)
