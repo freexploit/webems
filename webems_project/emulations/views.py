@@ -1,5 +1,5 @@
 import simplejson as json
-from models import ExtendedFlatPage
+from emulations.models import ExtendedFlatPage
 from accounts.models import MyEmulations
 from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
@@ -80,4 +80,18 @@ def myemulations(request, pk):
         response['success'] = False
     except ExtendedFlatPage.MultipleObjectsReturned:
         response['success'] = False
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
+def remove_myemulations(request, pk):
+    response = {}
+    response['success'] = True
+    response['errors'] = {}
+    u = request.user
+    try:
+        e = ExtendedFlatPage.objects.get(id=pk)
+    except MyEmulations.DoesNotExist:
+        response['success'] = False
+    me = MyEmulations.objects.get(user=u)
+    if e in me.emulations.all():
+        me.emulations.remove(e)
     return HttpResponse(json.dumps(response), mimetype='application/json')

@@ -35,4 +35,15 @@ $(document).ready(function(evt) {
             }
         });
 	});
+	$('.remove_myemulations').click(function(evt){
+		evt.preventDefault();
+		var em_id = $(this).closest('tr').attr('id');
+        $.post('/emulations/emulation/' + em_id + '/remove_myemulations/', {
+            data: ""
+        }, function(data) {
+            if (data && data.success) {
+               window.location.reload();
+            }
+        });
+	});
 });
