@@ -6,5 +6,48 @@
 {% block nav-all %}{% if page == 'All Emulations' %}active{% endif %}{% endblock %}
 
 {% block body %}
-	<h1>{{page}}</h1>
+<h1>{{page}}</h1>
+<form>
+	<div class="control-group" id="page_to_emulate">
+		<legend>Page to Emulate</legend>
+		<label>Page's URL:</label>
+		<input class="input-block-level" id="url" type="text" placeholder="http://google.com/" value="{{testURL}}">
+		<span class="help-block hide">Required</span>
+	</div>
+	<div class="control-group">
+		<label>Original Page's HTML:</label>
+		<textarea class="input-block-level" id="original_html_input" placeholder="<html><head><title></title></head><body></body></html>" rows="5">{{testHTML}}</textarea>
+		<span class="help-block"></span>
+	</div>
+	<div class="control-group">
+		<span class="help-block">Options are available to <a href="#">change patterns</a> for find and replace.</span>
+		<button type="submit" id="absolutify" class="btn">Make URLs absolute</button>
+	</div>
+	<br>
+	<div class="hide" id="modified_html">
+		<div class="control-group">
+			<legend>Edit Page</legend>
+			<label>Modified HTML:</label>
+			<textarea class="input-block-level" id="modified_html_input" rows="15"></textarea>
+		</div>
+		<div class="control-group">
+			<a id="preview" target="_blank" href="#">Preview emulation</a><span class="help-inline"> in a new tab</span>
+		</div>
+		<div class="control-group">
+			<legend>Save Emulation</legend>	
+			<label>Name of emulation:</label>
+			<input class="input span4" type="text" placeholder="Client's helper page for project 'Spring Design' ">
+		</div>
+		<div class="control-group">
+			<label>Save</label>
+			<button type="submit" id="save" class="btn btn-primary">Save Emulation</button>
+			<button type="submit" id="cancel" class="btn">Cancel</button>
+		</div>
+	</div>
+</form>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/create.js"></script>
 {% endblock %}

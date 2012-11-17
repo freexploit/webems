@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
+from django.template import Context, loader
+
+DEBUG_AND_TEST = False
+DEBUG_AND_TEST = True
 
 def mine(request):
     page = "My Emulations"
@@ -21,7 +25,14 @@ def all(request):
 
 def create(request):
     page = "Create"
-    return render_to_response('create.html', {'page' : page}, context_instance=RequestContext(request))
+    testHTML = ""
+    testURL = ""
+    if (DEBUG_AND_TEST):
+        c = Context({})
+        t = loader.get_template('test.html')
+        testHTML = t.render(c)
+        testURL = "http://google.com/test/"
+    return render_to_response('create.html', {'page' : page, 'testHTML' : testHTML, 'testURL' : testURL}, context_instance=RequestContext(request))
 
 def view(request, pk):
     content = "Emulation " + pk + "does not exist. <a href='/''>Home</a>."
