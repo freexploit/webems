@@ -71,7 +71,10 @@ $(document).ready(function(evt) {
 	            data : data
 	        }, function(data) {
 	            if (data && data.success) {
-	               console.log('success');
+	               $('#create_success').modal('toggle');
+	               $('#delete_emulation').attr('href', '/emulations/emulation/' + data.id + '/delete/');
+	               $('#edit_emulation').attr('href', '/emulations/emulation/' + data.id + '/edit/');
+	               $('#view_emulation').attr('href', '/emulations/emulation/' + data.id + '/view/');
 	            }
 	        });
 		}

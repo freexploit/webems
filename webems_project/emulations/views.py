@@ -63,15 +63,16 @@ def view(request, pk):
     return render_to_response('emulation.html', {'content' : content})
 
 def edit(request, pk):
+    page = "Edit"
     content = "Emulation " + pk + "does not exist. <a href='/''>Home</a>."
     try:
         f = ExtendedFlatPage.objects.get(id=pk)
-        content = f.content
     except ExtendedFlatPage.DoesNotExist:
         pass
     except ExtendedFlatPage.MultipleObjectsReturned:
         pass
-    return render_to_response('emulation.html', {'content' : content})
+    print f
+    return render_to_response('edit.html', {'emulation' : f, 'page' : page})
 
 def delete(request, pk):
     response = {}

@@ -9,36 +9,30 @@
 <h1>{{page}}</h1>
 <form>
 	<div class="control-group" id="page_to_emulate">
-		<legend>Page to Emulate</legend>
-		<label>Page's URL:</label>
-		<input class="input-block-level" id="url" type="text" placeholder="http://google.com/" value="{{testURL}}">
+		<legend>Page {{emulation.id}} - {{emulation.title}} <a class="helper" href="/emulations/emulation/{{emulation.id}}/view/" target="blank">(open)</a></legend>
+		<label>Page's URL (<a id="edit_url" href="#">edit</a>):</label>
+		<input class="input-block-level" id="url" type="text" disabled value="{{emulation.page_url}}">
 		<span class="help-block hide">Required</span>
 	</div>
 	<div class="control-group">
-		<label>Original Page's HTML:</label>
-		<textarea class="input-block-level" id="original_html_input" placeholder="<html><head><title></title></head><body></body></html>" rows="5">{{testHTML}}</textarea>
+		<label>Original Page's HTML (<a id="edit_url" href="#">edit</a>):</label>
+		<textarea class="input-block-level" id="original_html_input" rows="2" disabled>{{emulation.original_html}}</textarea>
 		<span class="help-block"></span>
 	</div>
-	<div class="control-group">
+	<div class="control-group hide" id="absolute_group">
 		<span class="help-block">Options are available to <a href="#">change patterns</a> for find and replace.</span>
 		<button type="submit" id="absolutify" class="btn">Make URLs absolute</button>
 	</div>
 	<br>
-	<div class="hide" id="modified_html">
+	<div class="" id="modified_html">
 		<div class="control-group" id="modified_html_group">
 			<legend>Edit Page</legend>
 			<label>Modified HTML:</label>
 			<span class="help-block hide">Required</span>
 			<textarea class="input-block-level" id="modified_html_input" rows="15"></textarea>
 		</div>
-		<div class="control-group" id="name_group">
-			<legend>Save Emulation</legend>	
-			<label>Description of emulation:</label>
-			<input class="input span4" type="text" id="name" placeholder="Client's helper page for project 'Spring Design' ">
-			<span class="help-block hide">Required</span>
-		</div>
 		<div class="control-group">
-			<label>Save:</label>
+			<legend>Save Emulation</legend>
 			<button type="submit" id="save" class="btn btn-primary">Save Emulation</button>
 			<button type="submit" id="cancel" class="btn">Cancel</button>
 		</div>
