@@ -25,21 +25,23 @@
 	</div>
 	<br>
 	<div class="hide" id="modified_html">
-		<div class="control-group">
+		<div class="control-group" id="modified_html_group">
 			<legend>Edit Page</legend>
 			<label>Modified HTML:</label>
+			<span class="help-block hide">Required</span>
 			<textarea class="input-block-level" id="modified_html_input" rows="15"></textarea>
 		</div>
 		<div class="control-group">
 			<a id="preview" target="_blank" href="#">Preview emulation</a><span class="help-inline"> in a new tab</span>
 		</div>
-		<div class="control-group">
+		<div class="control-group" id="name_group">
 			<legend>Save Emulation</legend>	
-			<label>Name of emulation:</label>
-			<input class="input span4" type="text" placeholder="Client's helper page for project 'Spring Design' ">
+			<label>Description of emulation:</label>
+			<input class="input span4" type="text" id="name" placeholder="Client's helper page for project 'Spring Design' ">
+			<span class="help-block hide">Required</span>
 		</div>
 		<div class="control-group">
-			<label>Save</label>
+			<label>Save:</label>
 			<button type="submit" id="save" class="btn btn-primary">Save Emulation</button>
 			<button type="submit" id="cancel" class="btn">Cancel</button>
 		</div>
@@ -49,5 +51,6 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="/static/js/jquery.scrollTo-1.4.3.1-min.js"></script>
 <script src="/static/js/create.js"></script>
 {% endblock %}
