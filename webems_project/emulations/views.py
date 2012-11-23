@@ -51,6 +51,31 @@ def save(request):
     response["id"] = f.id
     return HttpResponse(json.dumps(response), mimetype='application/json')
 
+def modify(request, pk):
+    response = {}
+    response['success'] = True
+    response['errors'] = {}
+    u = request.user
+    args = json.loads(request.POST.get('data'))
+    try:
+        f = ExtendedFlatPage.objects.get(id=pk)
+        content = f.content
+    except ExtendedFlatPage.DoesNotExist:
+        response['success'] = False
+        return HttpResponse(json.dumps(response), mimetype='application/json')
+    except ExtendedFlatPage.MultipleObjectsReturned:
+        response['success'] = False
+        return HttpResponse(json.dumps(response), mimetype='application/json')
+    # 'url' for flatpages needs to be unique :( just want it to be the ID
+    f.page_url=args['url']
+    f.content=args['html']
+    f.original_html=args['original_html']
+    f.title=args['name']
+    f.updated_by=u.id
+    f.save()
+    response["id"] = f.id
+    return HttpResponse(json.dumps(response), mimetype='application/json')
+
 def view(request, pk):
     content = "Emulation " + pk + "does not exist. <a href='/''>Home</a>."
     try:

@@ -7,15 +7,33 @@
 
 {% block body %}
 <h1>{{page}}</h1>
-<form>
+<form id="{{emulation.id}}">
+	<div class="" id="modified_html">
+		<div class="control-group">
+			<legend>Edit Page {{emulation.id}} - {{emulation.title}}</legend>
+			<button type="submit" id="save" class="btn btn-primary" data-complete-text="Saved!">Save Emulation</button>
+			<a id="view" href="/emulations/emulation/{{emulation.id}}/view/" target="_blank" class="btn">View</a>
+			<a href="/all" id="cancel" class="btn">Cancel</a>
+		</div>
+		<div class="control-group" id="modified_html_group">
+			<label>Modified HTML:</label>
+			<span class="help-block hide">Required</span>
+			<textarea class="input-block-level" id="modified_html_input" rows="15">{{emulation.content}}</textarea>
+		</div>
+	</div>
 	<div class="control-group" id="page_to_emulate">
-		<legend>Page {{emulation.id}} - {{emulation.title}} <a class="helper" href="/emulations/emulation/{{emulation.id}}/view/" target="blank">(open)</a></legend>
-		<label>Page's URL (<a id="edit_url" href="#">edit</a>):</label>
+		<legend>Page {{emulation.id}} details</legend>
+		<label>Page's Name <a class="edit_disabled" href="#">(edit)</a>:</label>
+		<input class="input-block-level" id="name" type="text" disabled value="{{emulation.title}}">
+		<span class="help-block hide">Required</span>
+	</div>
+	<div class="control-group">
+		<label>Page's URL <a class="edit_disabled" href="#">(edit)</a>:</label>
 		<input class="input-block-level" id="url" type="text" disabled value="{{emulation.page_url}}">
 		<span class="help-block hide">Required</span>
 	</div>
 	<div class="control-group">
-		<label>Original Page's HTML (<a id="edit_url" href="#">edit</a>):</label>
+		<label>Original Page's HTML <a class="edit_disabled" href="#">(edit)</a>:</label>
 		<textarea class="input-block-level" id="original_html_input" rows="2" disabled>{{emulation.original_html}}</textarea>
 		<span class="help-block"></span>
 	</div>
@@ -23,56 +41,12 @@
 		<span class="help-block">Options are available to <a href="#">change patterns</a> for find and replace.</span>
 		<button type="submit" id="absolutify" class="btn">Make URLs absolute</button>
 	</div>
-	<br>
-	<div class="" id="modified_html">
-		<div class="control-group" id="modified_html_group">
-			<legend>Edit Page</legend>
-			<label>Modified HTML:</label>
-			<span class="help-block hide">Required</span>
-			<textarea class="input-block-level" id="modified_html_input" rows="15"></textarea>
-		</div>
-		<div class="control-group">
-			<legend>Save Emulation</legend>
-			<button type="submit" id="save" class="btn btn-primary">Save Emulation</button>
-			<button type="submit" id="cancel" class="btn">Cancel</button>
-		</div>
-	</div>
 </form>
-
-<div class="modal fade hide" id="create_success">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Emulation Created Successfully</h3>
-  </div>
-  <div class="modal-body">
-
-    <p id="modal_text"> <span id="emulation_id"></span>  <span id="emulation_url"></span></p>
-  </div>
-  <div class="modal-footer">
-    <a href="/all" class="btn">Return to all</a>
-    <a href="#" id="edit_emulation" class="btn">Edit emulation</a>
-    <a href="#" id="delete_emulation" class="btn btn-danger">Delete emulation</a>
-    <a href="#" id="view_emulation" target="_blank" class="btn btn-primary delete_button">View Emulation</a>
-  </div>
-</div>
-
-<div class="modal hide fade" id="create_error">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Confirm Delete</h3>
-  </div>
-  <div class="modal-body">
-    <p id="modal_text">Confirm delete of emulation id <span id="emulation_id"></span> url <span id="emulation_url"></span></p>
-  </div>
-  <div class="modal-footer">
-    <a href="#" data-dismiss="modal" class="btn">Cancel</a>
-    <a href="#" class="btn btn-primary delete_button">Delete</a>
-  </div>
-</div>
+<br><br><br><br><br>
 
 {% endblock %}
 
 {% block scripts %}
 <script src="/static/js/jquery.scrollTo-1.4.3.1-min.js"></script>
-<script src="/static/js/create.js"></script>
+<script src="/static/js/edit.js"></script>
 {% endblock %}
