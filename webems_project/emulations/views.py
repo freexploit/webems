@@ -1,4 +1,5 @@
 import simplejson as json
+import datetime
 from emulations.models import ExtendedFlatPage
 from django.contrib.sites.models import Site
 from accounts.models import MyEmulations
@@ -9,7 +10,7 @@ from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
 
 DEBUG_AND_TEST = False
-DEBUG_AND_TEST = True
+# DEBUG_AND_TEST = True
 
 def mine(request):
     page = "My Emulations"
@@ -72,6 +73,7 @@ def modify(request, pk):
     f.original_html=args['original_html']
     f.title=args['name']
     f.updated_by=u.id
+    f.updated = datetime.datetime.now()
     f.save()
     response["id"] = f.id
     return HttpResponse(json.dumps(response), mimetype='application/json')

@@ -61,12 +61,12 @@ $(document).ready(function(evt) {
 			go = false;
 		}
 		if (go){
-			var data = {};
-			data["url"] = $("#url").val();
-            data["name"] = $("#name").val();
-            data["html"] = $("#modified_html_input").val();
-            data["original_html"] = $("#original_html_input").val();
-            data = $.toJSON(data);
+			var info = {};
+			info["url"] = $("#url").val();
+            info["name"] = $("#name").val();
+            info["html"] = $("#modified_html_input").val();
+            info["original_html"] = $("#original_html_input").val();
+            data = $.toJSON(info);
 	        $.post('/emulations/emulation/save/', {
 	            data : data
 	        }, function(data) {
@@ -75,6 +75,11 @@ $(document).ready(function(evt) {
 	               $('#delete_emulation').attr('href', '/emulations/emulation/' + data.id + '/delete/');
 	               $('#edit_emulation').attr('href', '/emulations/emulation/' + data.id + '/edit/');
 	               $('#view_emulation').attr('href', '/emulations/emulation/' + data.id + '/view/');
+	               $('#new_emulation_id').text(data.id);
+	               $('#new_emulation_name').text(info['name']);
+	               $('#new_emulation_url').text(info['url']);
+	               var url = location.protocol + "//" + location.host + "/emulations/emulation/"+ data.id + "/view/";
+	               $("#new_emulation_link").text(url);
 	            }
 	        });
 		}
