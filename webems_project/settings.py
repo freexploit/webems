@@ -7,8 +7,10 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+ABSOLUTE_URL = "/"
+
 ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
+    ('Kevin Doran', 'kev.doran@gmail.com'),
 )
 
 MANAGERS = ADMINS

@@ -8,8 +8,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.template import RequestContext
 from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
+import settings
 
-DEBUG_AND_TEST = False
+# DEBUG_AND_TEST = False
 DEBUG_AND_TEST = True
 
 def mine(request):
@@ -26,6 +27,8 @@ def all(request):
     return render_to_response('emulations.html', {'emulations' : emulations, 'page' : page}, context_instance=RequestContext(request))
 
 def create(request):
+    if not request.user.is_authenticated():
+        return redirect(settings.ABSOLUTE_URL + 'accounts/')
     page = "Create"
     testHTML = ""
     testURL = ""
@@ -90,6 +93,8 @@ def view(request, pk):
     return render_to_response('emulation.html', {'content' : content})
 
 def edit(request, pk):
+    if not request.user.is_authenticated():
+        return redirect(settings.ABSOLUTE_URL + 'accounts/')
     page = "Edit"
     content = "Emulation " + pk + "does not exist. <a href='/''>Home</a>."
     try:
