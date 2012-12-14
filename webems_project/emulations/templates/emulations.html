@@ -5,6 +5,10 @@
 {% block nav-mine %}{% if page == 'My Emulations' %}active{% endif %}{% endblock %}
 {% block nav-all %}{% if page == 'All Emulations' %}active{% endif %}{% endblock %}
 
+{% block localcss %}
+<link rel="stylesheet" href="/static/css/emulations.css" />
+{% endblock %}
+
 {% block body %}
 <h1>{{page}}</h1>
 <table class="table table-striped">
@@ -13,8 +17,6 @@
 			<th>ID</th>
 			<th>Name</th>
 			<th>Original URL</th>
-			<th>Created</th>
-			<th>Updated</th>
 			<th>Edit</th>
 			<th>My Emulations</th>
 			<th>Delete</th>
@@ -24,10 +26,13 @@
 		{% for emulation in emulations %}
 		<tr id="{{emulation.id}}">
 			<td>{{emulation.id}}</td>
-			<td><a target="_blank" href="/emulations/emulation/{{emulation.id}}/view/">{{emulation.title}}</td>
+			<td><a target="_blank" href="/emulations/emulation/{{emulation.id}}/view/">{{emulation.title}}</a>
+			<div class="date">
+				Created on {{emulation.created}} <br/>by {{emulation.creator}}
+				<br>last updated on {{emulation.updated}} <br/>by {{emulation.updator}}
+			</div>
+			</td>
 			<td class="emulation_url">{{emulation.page_url}}</td>
-			<td>{{emulation.created}} <br/>by {{emulation.creator}}</td>
-			<td>{{emulation.updated}} <br/>by {{emulation.updator}}</td>
 			<td><a href="/emulations/emulation/{{emulation.id}}/edit">edit</a></td>
 			<td><a class="{% if page == 'My Emulations' %}remove_myemulations{% else %}myemulations{% endif %}" href="/emulations/emulation/{{emulation.id}}/myemulations" >{% if page == 'My Emulations' %}remove{% else %}add{% endif %}</a></td>
 			<td><a class="delete" href="#">delete</a></td>
@@ -58,6 +63,9 @@
     <a href="#" id="confirm_deleted" class="btn btn-primary">OK</a>
   </div>
 </div>
+
+<iframe src="http://localhost:8000/create"></iframe>
+
 
 {% endblock %}
 

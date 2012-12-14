@@ -6,6 +6,13 @@
 {% block nav-all %}{% if page == 'All Emulations' %}active{% endif %}{% endblock %}
 
 {% block body %}
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+console.log(document);
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
 <h1>{{page}}</h1>
 <form>
 	<div class="control-group" id="page_to_emulate">
@@ -39,6 +46,10 @@
 		</div>
 		<div class="control-group">
 			<label>Save:</label>
+			<div class="alert hide">
+			  <button type="button" class="close" data-dismiss="alert">&times;</button>
+			  <strong>Error! Emulation could not be saved.</strong> Please contact the administrator to see if something's wrong with the database. Some types of databases setups don't support certain characters, so you can also try removing non-latin based characters.
+			</div>
 			<button type="submit" id="save" class="btn btn-primary">Save Emulation</button>
 			<button type="submit" id="cancel" class="btn">Cancel</button>
 		</div>
@@ -67,17 +78,12 @@
   </div>
 </div>
 
-<div class="modal hide fade" id="create_error">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-    <h3>Confirm Delete</h3>
-  </div>
+<div class="modal hide fade" id="emulation_deleted">
   <div class="modal-body">
-    <p id="modal_text">Confirm delete of emulation id <span id=""></span> url <span id="emulation_url"></span></p>
+    <p id="modal_text">Emulation deleted</p>
   </div>
   <div class="modal-footer">
-    <a href="#" data-dismiss="modal" class="btn">Cancel</a>
-    <a href="#" class="btn btn-primary delete_button">Delete</a>
+    <a href="#" id="confirm_deleted" class="btn btn-primary">OK</a>
   </div>
 </div>
 

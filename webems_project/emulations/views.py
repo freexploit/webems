@@ -10,7 +10,7 @@ from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
 
 DEBUG_AND_TEST = False
-# DEBUG_AND_TEST = True
+DEBUG_AND_TEST = True
 
 def mine(request):
     page = "My Emulations"
@@ -41,7 +41,7 @@ def save(request):
     response['success'] = True
     response['errors'] = {}
     u = request.user
-    args = json.loads(request.POST.get('data'))
+    args = json.loads(request.raw_post_data)
     # 'url' for flatpages needs to be unique :( just want it to be the ID
     pages = ExtendedFlatPage.objects.all().order_by('id')
     url = "0" if len(pages) < 1 else str(pages[len(pages)-1].id+1)

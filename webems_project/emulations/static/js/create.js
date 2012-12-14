@@ -1,5 +1,5 @@
 String.prototype.splice = function( idx, rem, s ) {
-    return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
+	return (this.slice(0,idx) + s + this.slice(idx + Math.abs(rem)));
 };
 
 $(document).ready(function(evt) {
@@ -30,11 +30,10 @@ $(document).ready(function(evt) {
 			// }
 			$("#modified_html_input").val(original);
 			$("#modified_html").fadeIn();
-			console.log(original);
 		}
 	});
-	$("#save").click(function(evt){
-		evt.preventDefault();
+$("#save").click(function(evt){
+	evt.preventDefault();
 		//clear any validation errors
 		$("#page_to_emulate").removeClass('error');
 		$($("#page_to_emulate").find('.help-block')[0]).hide();
@@ -63,25 +62,50 @@ $(document).ready(function(evt) {
 		if (go){
 			var info = {};
 			info["url"] = $("#url").val();
-            info["name"] = $("#name").val();
-            info["html"] = $("#modified_html_input").val();
-            info["original_html"] = $("#original_html_input").val();
-            data = $.toJSON(info);
-	        $.post('/emulations/emulation/save/', {
-	            data : data
-	        }, function(data) {
-	            if (data && data.success) {
-	               $('#create_success').modal('toggle');
-	               $('#delete_emulation').attr('href', '/emulations/emulation/' + data.id + '/delete/');
-	               $('#edit_emulation').attr('href', '/emulations/emulation/' + data.id + '/edit/');
-	               $('#view_emulation').attr('href', '/emulations/emulation/' + data.id + '/view/');
-	               $('#new_emulation_id').text(data.id);
-	               $('#new_emulation_name').text(info['name']);
-	               $('#new_emulation_url').text(info['url']);
-	               var url = location.protocol + "//" + location.host + "/emulations/emulation/"+ data.id + "/view/";
-	               $("#new_emulation_link").text(url);
-	            }
-	        });
+			info["name"] = $("#name").val();
+			info["html"] = $("#modified_html_input").val();
+			info["original_html"] = $("#original_html_input").val();
+			var data = $.toJSON(info);
+			$.ajax({
+				type: "POST",
+				url : '/emulations/emulation/save/', 
+				data : data,
+				success: function(data) {
+					if (data && data.success) {
+						$('#create_success').modal('toggle');
+						$('#delete_emulation').attr('href', '/emulations/emulation/' + data.id + '/delete/');
+						$('#edit_emulation').attr('href', '/emulations/emulation/' + data.id + '/edit/');
+						$('#view_emulation').attr('href', '/emulations/emulation/' + data.id + '/view/');
+						$('#new_emulation_id').text(data.id);
+						$('#new_emulation_name').text(info['name']);
+						$('#new_emulation_url').text(info['url']);
+						var url = location.protocol + "//" + location.host + "/emulations/emulation/"+ data.id + "/view/";
+						$("#new_emulation_link").text(url);
+					}
+					else{
+						$('.alert').show();
+					}
+				},
+				error: function(){
+					$('.alert').show();
+				},
+			});
 		}
+	});
+	$("#delete_emulation").click(function(evt){
+		evt.preventDefault();
+		var em_id = $("#new_emulation_id").text();
+        $.post('/emulations/emulation/' + em_id + '/delete/', {
+            data: ""
+        }, function(data) {
+            if (data && data.success) {
+               $('#create_success').modal('toggle');
+               $('#emulation_deleted').modal('toggle');
+            }
+        });
+	});
+	$("#confirm_deleted").click(function(evt){
+		evt.preventDefault();
+		window.location.reload();
 	});
 });
