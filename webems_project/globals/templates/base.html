@@ -23,11 +23,11 @@
           <li class="{% block nav-mine %}{% endblock %}">
               <a href="/">Mine</a>
             </li>
-            <li class="{% block nav-all %}{% endblock %}">
-              <a href="/all">All</a>
-            </li>
             <li class="{% block nav-create %}{% endblock %}">
               <a href="/create">Create</a>
+            </li>
+            <li class="{% block nav-all %}{% endblock %}">
+              <a href="/all">All</a>
             </li>
             <li class="account">
               {% if user.is_authenticated %}

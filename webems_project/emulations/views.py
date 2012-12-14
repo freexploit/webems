@@ -10,8 +10,8 @@ from django.shortcuts import render_to_response, redirect
 from django.template import Context, loader
 import settings
 
-# DEBUG_AND_TEST = False
-DEBUG_AND_TEST = True
+DEBUG_AND_TEST = False
+# DEBUG_AND_TEST = True
 
 def mine(request):
     page = "My Emulations"
