@@ -12,6 +12,6 @@ Because of how some web pages are built, this tool doesn't work with every site.
 install
 ======
 
-Application is built on python and django. You'd a server runing python 2.7.1, the python libraries listed in the project's requirements.txt, and an update to the database settings in settings.py. Currently set to sqlite, which has been working fine for ~150 or so emulations and about 80 users. 
+Application is built on python and django (1.4.2). You'd a server runing python 2.7.1, the python libraries listed in the project's requirements.txt, and an update to the database settings in settings.py. Currently set to sqlite, which has been working fine for ~150 or so emulations and about 80 users. 
 
 Please don't ever make an installation of this available to the general public. Just think about it. 
